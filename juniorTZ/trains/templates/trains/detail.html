@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Poyezd malumotlari</h1>
+<div class="row">
+    <div class="col-md">
+        <table class="table table-striped">
+            <tr>
+                <th>Poyezd raqami</th>
+                <th>Shaxardan</th>
+                <th>Shaxarga</th>
+                <th>Sayohat vaqti</th>
+            </tr>
+
+             <tr>
+                 <td>{{object.name}}</td>
+                 <td>{{object.from_city}}</td>
+                 <td>{{object.to_city}}</td>
+                 <td>{{object.travel_time}}</td>
+             </tr>
+
+        </table>
+    </div>
+</div>
+
+<!--detail page gorod-->
+<div class="row">
+    <div class="col-md-4">
+        <a href="{% url 'trains:home' %}" class="btn btn-primary btn-sm">Shaxarlar ro`yxati</a>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+

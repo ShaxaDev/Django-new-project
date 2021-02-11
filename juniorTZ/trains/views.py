@@ -4,12 +4,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.shortcuts import render, Http404, get_object_or_404
 from django.urls import reverse_lazy
-
 from .forms import TrainForm
 from .models import Train
 from django.views.generic import (DetailView, CreateView,
                                   UpdateView, DeleteView, ListView)
-# from .forms import TrainForm
 
 
 def home(request):
@@ -25,7 +23,7 @@ class TrainListView(ListView):
     model=Train
     template_name='trains/home.html'
     paginate_by=5
-    context_object_name = 'trains'
+    context_object_name='trains'
 
 class TrainDetailView(DetailView):
     model=Train

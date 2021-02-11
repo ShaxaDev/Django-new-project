@@ -5,71 +5,50 @@
 <div class="row">
     <div class="col-md-8 mx-auto">
 {% if routes %}
-
-            <h3><i class="fa fa-map-marker" aria-hidden="true"></i> Yo`nalish qidiruv natijalari{% if routes|length != 1 %} {% endif %}
-                 {{ cities.from_city.name }} dan {{ cities.to_city.name }} ga <a style="text-decoration:none" href="{% url 'find_routes'%}">boshqattan qidiruv</a></h3>
+            <h3><i class="fa fa-map-marker" aria-hidden="true"></i> Yo`nalish qidiruv natijalari{% if routes|length != 1 %}{% endif %}
+                 {{ cities.from_city.name }} dan {{ cities.to_city.name }} ga <a style="text-decoration:none;font-size:25px" href="{% url 'find_routes'%}">boshqattan qidiruv</a></h3>
         <br>
             {% for route in routes %}
                 <form action="{% url 'add_routes' %}" method="post"> {% csrf_token %}
                     <input type="hidden" name="from_city" value="{{ cities.from_city.id }}">
                     <input type="hidden" name="to_city" value="{{ cities.to_city.id }}">
                     <input type="hidden" name="total_time" value="{{ route.total_time }}">
-                    <input type="hidden" name="trains"
-                           value="{% for train in route.trains%}{{ train.id }},{% endfor %}">
-                {% if forloop.first %}<h4>Manzilga borish uchun yo`llar ro`yxati {{routes|length}} ta</h4><br> {% endif %}
-                <h5><i class="fa fa-clock-o" aria-hidden="true"></i> Manzilga borish ucun ketadigan umumiy vaqt  <u>{{ route.total_time }} daqiqa</u></h5>
+                    <input type="hidden" name="trains" value="{% for train in route.trains%}{{ train.id }},{% endfor %}">
+                    {% if forloop.first %}
+                        <h4>Manzilga borish uchun yo`llar ro`yxati {{routes|length}} ta</h4><br>
+                    {% endif %}
+                    <h5><i class="fa fa-clock-o" aria-hidden="true"></i> Manzilga borish ucun ketadigan umumiy vaqt  <u>{{ route.total_time }} daqiqa</u></h5>
                     <div style=" border-left: 4px solid green;">
-                <table class="table" style="border-left: thin solid #A9A9A9;">
-                  <thead>
-                    <tr>
-                      <th scope="col"><i class="fa fa-map-signs" aria-hidden="true"></i> </th>
-                      <th scope="col">Manzilga borish uchun poyezdlar xaritasi</th>
+                        <table class="table" style="border-left: thin solid #A9A9A9;">
+                          <thead>
+                            <tr>
+                              <th scope="col"><i class="fa fa-map-signs" aria-hidden="true"></i> </th>
+                              <th scope="col">Manzilga borish uchun poyezdlar xaritasi</th>
 
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for train in route.trains %}
-                    <tr>
-                      <th scope="row">{{ forloop.counter }}</th>
-                        <td><i class="fa fa-train" aria-hidden="true"></i> <u>Poyezd {{ train.name }} </u> <b>{{ train.from_city.name }}</b> dan <b>{{ train.to_city.name }}</b> gacha boradi </td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for train in route.trains %}
+                            <tr>
+                              <th scope="row">{{ forloop.counter }}</th>
+                                <td><i class="fa fa-train" aria-hidden="true"></i> <u>Poyezd {{ train.name }} </u> <b>{{ train.from_city.name }}</b> dan <b>{{ train.to_city.name }}</b> gacha boradi </td>
 
-                    </tr>
-                  {% endfor %}
-                  </tbody>
-                </table>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
                     </div>
                     <button type="submit" class="btn btn-success">Saqlash</button>
                 </form>
         <br><br>
-
             {% endfor %}
 
     </div>
 </div>
 
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-      <li class="page-item">
-         {% if page_obj.has_previous %}
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        {% endif %}
-    </li>
-      {% for page in page_obj.paginator.page_range %}
-            <li class="page-item {% if page == page_obj.number %}active{% endif %}"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
-      {% endfor %}
-    <li class="page-item">
-         {% if page_obj.has_next %}
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        {% endif %}
-    </li>
-  </ul>
-</nav>
-{% else %}
+<!--form pastda qidiruv -->
 
+{% else %}
 <div class="row">
     <h3 style="margin-left:200px"><i class="fa fa-train" aria-hidden="true"></i> Yo'nalish qidiring...</h3>
     <div class="col-md-4" style="margin-left:200px">

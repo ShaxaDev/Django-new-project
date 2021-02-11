@@ -10,6 +10,6 @@ class City(models.Model):
 
     class Meta:
         verbose_name= "Shaxar"
-        verbose_name_plural= "Shaxarlar"
+        verbose_name_plural= "Shaxarlar ombori"
         ordering=["name"]
 

@@ -35,14 +35,6 @@ def find_routes(request):
         form=RouteForm()
         return render(request, 'routes/home.html', {'form': form})
 
-def result(request,**kwargs):
-    response=kwargs['context']
-    lst = Paginator(response['routes'], 2)
-    page_number = request.GET.get('page')
-    page_obj = lst.get_page(page_number)
-    return render(request,'routes/result.html',{'page_obj':page_obj})
-
-
 def add_routes(request):
     if request.method=='POST':
         context={}
@@ -66,7 +58,7 @@ def add_routes(request):
             context['form']=form
         return render(request,'routes/create.html',context)
     else:
-        messages.error(request,'Yo`l saqlashda xatolik')
+        messages.error(request,'Yo`lni saqlashda xatolik aniqlandi')
         return redirect('/')
 
 def save_route(request):
@@ -74,7 +66,7 @@ def save_route(request):
         form=RouteModelForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request,'Ajoyib yo`l saqlandi!')
+            messages.success(request,'Ajoyib sizni yo`lingiz saqlandi!')
             return redirect('/')
         return render(request,'routes/create.html',{'form':form})
     else:

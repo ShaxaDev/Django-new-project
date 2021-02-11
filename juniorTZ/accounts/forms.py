@@ -6,14 +6,13 @@ from django.utils.safestring import mark_safe
 User=get_user_model()
 
 class UserRegisterForm(forms.ModelForm):
-    username = forms.CharField(label='Ism',
+    username = forms.CharField(label=mark_safe('<b>Ism</b>'),
                                widget=forms.TextInput(
                                attrs={'class': 'form-control', 'placeholder': 'ismingizni yozing'}))
-
-    password = forms.CharField(label='Parol',
+    password = forms.CharField(label=mark_safe('<b>Parol</b>'),
                                widget=forms.PasswordInput(
                                attrs={'class': 'form-control', 'placeholder': 'parolni yozing'}))
-    password2 = forms.CharField(label='Parol tasdiqlang',
+    password2 = forms.CharField(label=mark_safe('<b>Parolni tasdiqlang</b>'),
                                widget=forms.PasswordInput(
                                attrs={'class': 'form-control', 'placeholder': 'parolni qayta yozing'}))
     class Meta:
@@ -30,11 +29,10 @@ class UserRegisterForm(forms.ModelForm):
 
 
 class UserLoginForm(forms.Form):
-    username=forms.CharField(label=mark_safe('Ism'),
+    username=forms.CharField(label=mark_safe('<b>Ism</b>'),
                              widget=forms.TextInput(
                              attrs={'class':'form-control','placeholder':'ismingizni yozing'}))
-
-    password = forms.CharField(label='Parol',
+    password = forms.CharField(label=mark_safe('<b>parol</b>'),
                                widget=forms.PasswordInput(
                                attrs={'class': 'form-control', 'placeholder': 'parolni yozing'}))
 
@@ -46,7 +44,7 @@ class UserLoginForm(forms.Form):
             if not qs.exists():
                 raise ValidationError('Foydalanuvchi topilmadi')
             if not check_password(password,qs[0].password):
-                raise ValidationError('parol xato!')
+                raise ValidationError('Parol xato!')
             user=authenticate(username=username,password=password)
             if not user:
                 raise ValidationError('Foydalanuvchi active emas')

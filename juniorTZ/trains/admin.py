@@ -1,14 +1,11 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import Train
-class TrainAdmin (admin.ModelAdmin):
+
+class TrainAdmin(admin.ModelAdmin):
+    list_display = ('name', 'from_city', 'to_city', 'travel_time')
+    list_editable = ('travel_time',)
+
     class Meta:
         model=Train
-
-
-    list_display=('name','from_city','to_city','travel_time')
-    list_editable=('travel_time',)
-
 
 admin.site.register(Train,TrainAdmin)

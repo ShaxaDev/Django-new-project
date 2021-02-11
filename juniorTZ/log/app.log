@@ -7888,3 +7888,16 @@ DEBUG 2021-02-09 08:53:44,749 utils (0.000) SELECT "cities_city"."id", "cities_c
 DEBUG 2021-02-09 08:53:49,756 utils (0.000) SELECT "cities_city"."id", "cities_city"."name" FROM "cities_city" ORDER BY "cities_city"."name" ASC; args=()
 DEBUG 2021-02-09 08:53:49,767 utils (0.000) SELECT "cities_city"."id", "cities_city"."name" FROM "cities_city" ORDER BY "cities_city"."name" ASC; args=()
 DEBUG 2021-02-09 08:53:49,778 utils (0.000) SELECT "cities_city"."id", "cities_city"."name" FROM "cities_city" ORDER BY "cities_city"."name" ASC; args=()
+WARNING 2021-02-09 10:08:52,222 log Not Found: /citieshhh
+WARNING 2021-02-09 15:36:05,174 log Not Found: /static/img/train1.png
+WARNING 2021-02-09 15:36:06,277 log Not Found: /favicon.ico
+WARNING 2021-02-09 15:36:07,991 log Not Found: /static/img/train1.png
+WARNING 2021-02-09 15:36:11,736 log Not Found: /static/img/train1.png
+WARNING 2021-02-09 15:36:18,440 log Not Found: /static/img/train1.png
+WARNING 2021-02-09 15:37:23,857 log Not Found: /static/img/train1.png
+WARNING 2021-02-09 15:37:50,899 log Not Found: /static/img/train1.png
+WARNING 2021-02-09 15:37:53,160 log Not Found: /static/img/train1.png
+WARNING 2021-02-09 15:38:16,118 log Not Found: /static/img/train1.png
+WARNING 2021-02-09 15:38:21,757 log Not Found: /static/img/train1.png
+WARNING 2021-02-09 15:39:52,032 log Not Found: /static/img/train1.png
+WARNING 2021-02-09 15:39:52,863 log Not Found: /static/img/train1.png

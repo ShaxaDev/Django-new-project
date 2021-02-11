@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import home, TrainListView, TrainDetailView, TrainUpdateView, TrainCreateView, TrainDeleteView
+from .views import (home, TrainListView, TrainDetailView,
+                    TrainUpdateView, TrainCreateView,
+                    TrainDeleteView)
 
 app_name='trains'
 

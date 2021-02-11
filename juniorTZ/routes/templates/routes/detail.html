@@ -25,7 +25,7 @@
                  <td>
 
                      {% for train in object.trains.all %}
-                            <p>Poyezd {{train}} ,sayohat vaqti {{train.travel_times}}</p>
+                            <p>Poyezd {{train.name}} ,sayohat vaqti {{train.travel_time}}</p>
                      {% endfor %}
 
                  </td>

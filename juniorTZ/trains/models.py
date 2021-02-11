@@ -1,13 +1,12 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-# Create your models here.
 from cities.models import City
 
 
 
 class Train(models.Model):
-    name=models.CharField(max_length=50,unique=True,verbose_name='Train number')
-    travel_time=models.PositiveSmallIntegerField(verbose_name='time travel')
+    name=models.CharField(max_length=50,unique=True,verbose_name='Poyezd xos nomi')
+    travel_time=models.PositiveSmallIntegerField(verbose_name='Sayohat vaqti')
     from_city=models.ForeignKey(City,on_delete=models.CASCADE,related_name='from_city_set',verbose_name='Qaysi shaxardan')
     to_city=models.ForeignKey(City,on_delete=models.CASCADE,related_name='to_city_set',verbose_name='Qaysi shaxarga')
 
@@ -16,21 +15,26 @@ class Train(models.Model):
 
     def clean(self):
         if self.from_city == self.to_city:
-            raise ValidationError('Shaxarlar nomi xar xil bolishi kk !!!')
-        qs=Train.objects.filter(name=self.name,from_city=self.from_city,to_city=self.to_city,travel_time=self.travel_time)
+            raise ValidationError('Shaxarlar nomi xar xil bolishi kerak !!!')
+        qs=Train.objects.filter(name=self.name,
+                                from_city=self.from_city,
+                                to_city=self.to_city,
+                                travel_time=self.travel_time)
         if qs.exists():
-            raise ValidationError('Malumotlar ozgartrilmadi!')
+            raise ValidationError('Malumotlar o`zgartrilmadi yoki bu poyezd ro`yxatda bor!')
 
     def save(self,*args,**kwargs):
         self.clean()
         super().save(*args,**kwargs)
 
     class Meta:
-        verbose_name='Train'
-        verbose_name_plural='Trains'
+        verbose_name='Poyezd'
+        verbose_name_plural='Poyezdlar ombori'
 
 
 
 class TrainTest(models.Model):
     name=models.CharField(max_length=50,unique=True,verbose_name='Train number')
-    from_city=models.ForeignKey(City,on_delete=models.CASCADE,verbose_name='Qaysi shaxardan',related_name='from_shaxar')
+    from_city=models.ForeignKey(City,
+                                on_delete=models.CASCADE,
+                                verbose_name='Qaysi shaxardan',related_name='from_shaxar')

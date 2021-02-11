@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from routes.views import (
-    find_routes,home,add_routes,save_route,RouteListView,RouteDetailView,result,
+    find_routes,home,add_routes,save_route,RouteListView,RouteDetailView,
     RouteDeleteView,
 )
 
@@ -34,10 +34,7 @@ urlpatterns = [
     path('save_route/',save_route,name='save_route'),
     path('list/',RouteListView.as_view(),name='list'),
     path('route/<int:pk>',RouteDetailView.as_view(),name='route_detail'),
-    path('result/',result,name='result'),
     path('route/<int:pk>/delete/',RouteDeleteView.as_view(),name='route_delete'),
 
-]
-if settings.DEBUG:
-    urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

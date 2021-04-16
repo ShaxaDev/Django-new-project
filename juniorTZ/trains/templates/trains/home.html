@@ -11,7 +11,7 @@
                 <th>Shaxardan</th>
                 <th>Shaxarga</th>
                 <th>Sayohat vaqti</th>
-                {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
                 <th>Update</th>
                 <th>Delete</th>
                 {%endif%}
@@ -22,7 +22,7 @@
                  <td>{{object.from_city}}</td>
                  <td>{{object.to_city}}</td>
                  <td>{{object.travel_time}}</td>
-                  {% if request.user.is_authenticated %}
+                  {% if request.user.is_superuser %}
                  <td><a href="{% url 'trains:update' object.pk %}" class="btn btn-primary btn-sm">Update</a></td>
                  <td><a href="{% url 'trains:delete' object.pk %}" class="btn btn-danger btn-sm">Delete</a></td>
                  {%endif%}

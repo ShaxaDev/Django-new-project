@@ -12,7 +12,7 @@
                 <th>Shaxarga</th>
                 <th>Sayohat vaqti</th>
                 <th>Poyezdlar ro`yxati</th>
-                {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
                 <th>O`chirish</th>
                 {%endif%}
             </tr>
@@ -30,7 +30,7 @@
 
                  </td>
 
-                 {% if request.user.is_authenticated %}
+                 {% if request.user.is_superuser %}
                         <td><a href="{% url 'route_delete' object.pk %}" class="btn btn-primary btn-sm">Delete</a></td>
                  {% endif %}
 

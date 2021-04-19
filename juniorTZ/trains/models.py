@@ -9,9 +9,14 @@ class Train(models.Model):
     travel_time=models.PositiveSmallIntegerField(verbose_name='Sayohat vaqti')
     from_city=models.ForeignKey(City,on_delete=models.CASCADE,related_name='from_city_set',verbose_name='Qaysi shaxardan')
     to_city=models.ForeignKey(City,on_delete=models.CASCADE,related_name='to_city_set',verbose_name='Qaysi shaxarga')
+    start_train_day=models.DateField(null=True,blank=True)
+    start_train_time=models.TimeField(null=True,blank=True)
+    end_train_day=models.DateField(null=True,blank=True)
+    place=models.IntegerField(default=0)
 
     def __str__(self):
         return f'Train N{self.name} and city {self.from_city}'
+
 
     def clean(self):
         if self.from_city == self.to_city:
@@ -19,12 +24,15 @@ class Train(models.Model):
         qs=Train.objects.filter(name=self.name,
                                 from_city=self.from_city,
                                 to_city=self.to_city,
-                                travel_time=self.travel_time)
+                                start_train_day=self.start_train_day,
+                                start_train_time=self.start_train_time,
+                                end_train_day=self.end_train_day)
         if qs.exists():
             raise ValidationError('Malumotlar o`zgartrilmadi yoki bu poyezd ro`yxatda bor!')
 
     def save(self,*args,**kwargs):
         self.clean()
+
         super().save(*args,**kwargs)
 
     class Meta:

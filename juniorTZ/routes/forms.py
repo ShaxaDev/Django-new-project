@@ -20,9 +20,9 @@ class RouteForm(forms.Form):
                                      queryset=City.objects.all(),required=False,
                                      widget=forms.SelectMultiple(
                                      attrs={'class': 'form-control js-example-basic-multiple'}))
-    travelling_time = forms.IntegerField(label=mark_safe('<b>Sayohat vaqti</b>'),
-                                     widget=forms.NumberInput(
-                                     attrs={'class': 'form-control', 'placeholder': 'sayohat vaqti...'}))
+    travelling_time = forms.DateField(label=mark_safe('<b>Ketish kuni</b>'),
+                                     widget=forms.DateInput(
+                                     attrs={'class': 'form-control', 'type':'date','placeholder': 'kun/oy/yil'}))
 
 
 class RouteModelForm(forms.ModelForm):

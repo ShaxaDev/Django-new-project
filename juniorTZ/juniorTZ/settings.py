@@ -45,8 +45,18 @@ INSTALLED_APPS = [
     'routes',
     'accounts',
     'crispy_forms',
+    'ckeditor',
+    'ckeditor_uploader'
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Basic',
+    },
+}
+
 MIDDLEWARE = [
     # 'django.middleware.security.SecurityMiddleware',
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -129,6 +139,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     STATIC_DIR,
 ]
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
 #
 # LOGGING={
 #     'version': 1,

@@ -28,7 +28,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for train in route.trains%}
+                    {% for train in route.trains %}
                     <tr>
                       <th scope="row">{{ forloop.counter }}</th>
                         <td><i class="fa fa-train" aria-hidden="true"></i> <u>Poyezd {{ train.name }} </u> <b>{{ train.from_city.name }}</b> dan <b>{{ train.to_city.name }}</b> gacha boradi </td>

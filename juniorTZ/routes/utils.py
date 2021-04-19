@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from trains.models import Train
 
 
@@ -23,19 +25,24 @@ def get_graph(qs):
 
 def get_routes(request, form) -> dict:
     context = {'form': form}
-    qs = Train.objects.all().select_related('from_city', 'to_city')
+
+    qs = Train.objects.filter(start_train_day__lte=form.cleaned_data['travelling_time']).select_related('from_city', 'to_city')
+    print(qs)
     graph = get_graph(qs)
     data = form.cleaned_data
     from_city = data['from_city']
     to_city = data['to_city']
     cities = data['cities']
     travelling_time = data['travelling_time']
+    print(travelling_time)
     all_ways = list(dfs_paths(graph, from_city.id, to_city.id))
     print(all_ways)
     if not len(all_ways):
         raise ValueError('Siz istayotgan yo`nalishda poyezd yo`q afsuski!')
     print(cities)
+    total_time=0
     if cities:
+        total_time+=len(cities)*15
         _cities = [city.id for city in cities]
         right_ways = []
         for route in all_ways:
@@ -60,7 +67,7 @@ def get_routes(request, form) -> dict:
             total_time += q.travel_time
             tmp['trains'].append(q)
         tmp['total_time'] = total_time
-        if total_time <= travelling_time:
+        if total_time <= 1000000:
             routes.append(tmp)
     if not routes:
         raise ValueError('Siz istayotgan vaqtda manzilga borib bolmaydi uzur!')

@@ -1,7 +1,11 @@
 {% extends "base.html" %}
+{%load static%}
 {% load crispy_forms_tags %}
+
 {% block content %}
 {% load static %}
+
+
 <div class="row">
     <div class="col-md-8 mx-auto">
 {% if routes %}
@@ -49,9 +53,10 @@
 <!--form pastda qidiruv -->
 
 {% else %}
+
 <div class="row">
-    <h3 style="margin-left:200px"><i class="fa fa-train" aria-hidden="true"></i> Yo'nalish qidiring...</h3>
-    <div class="col-md-4" style="margin-left:200px">
+    <h3 style="margin-left:400px"><i class="fa fa-train" aria-hidden="true"></i> Sayohat qiling...</h3>
+    <div class="col-md-4" style="margin-left:400px">
 
         <form method="POST" action="{% url 'find_routes' %}" style="margin-bottom:25px;">{% csrf_token %}
               {{form.as_p}}

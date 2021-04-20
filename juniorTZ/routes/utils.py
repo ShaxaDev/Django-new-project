@@ -30,10 +30,12 @@ def get_routes(request, form) -> dict:
     print(qs)
     graph = get_graph(qs)
     data = form.cleaned_data
+
     from_city = data['from_city']
     to_city = data['to_city']
     cities = data['cities']
     travelling_time = data['travelling_time']
+    end_date=travelling_time
     print(travelling_time)
     all_ways = list(dfs_paths(graph, from_city.id, to_city.id))
     print(all_ways)
@@ -82,5 +84,6 @@ def get_routes(request, form) -> dict:
                 if time == route['total_time']:
                     sorted_routes.append(route)
     context['routes'] = sorted_routes
+    context['end_date']=end_date
     context['cities'] = {'from_city': from_city, 'to_city': to_city}
     return context

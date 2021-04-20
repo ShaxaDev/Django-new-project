@@ -41,6 +41,8 @@ class RouteModelForm(forms.ModelForm):
                                      attrs={'class': 'form-control d-none'}))
     travel_times = forms.IntegerField(widget=forms.HiddenInput())
 
+    ticket_number=forms.IntegerField(widget=forms.HiddenInput())
+
 
     class Meta:
         model=Route

@@ -1,3 +1,6 @@
+from datetime import timedelta, datetime
+import random
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -7,6 +10,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView
+
+from .test_ticket import create_ticket
 from .forms import RouteForm, RouteModelForm
 from .models import Route
 from .utils import get_routes
@@ -43,18 +48,35 @@ def add_routes(request):
             from_city_id=int(data['from_city'])
             to_city_id=int(data['to_city'])
             total_time=int(data['total_time'])
+            end_date=data['end_date']
+            datetime_object = datetime.strptime(end_date,'%B %d, %Y')
+            print(datetime_object.day)
+            print(datetime_object.month)
+            month_name = datetime_object.strftime('%B')
+            end=f'{datetime_object.day}-{month_name}'
             trains=data['trains'].split(',')
             trains_lst=[int(t) for t in trains if t.isdigit() ]
             qs=Train.objects.filter(id__in=trains_lst).select_related('from_city','to_city')
             cities=City.objects.filter(id__in=[from_city_id,to_city_id]).in_bulk()
+            ticket_num = random.randint(100, 10000)
             form=RouteModelForm(
                 initial={
                     'from_city':cities[from_city_id],
                     'to_city':cities[to_city_id],
                     'trains':qs,
                     'travel_times':total_time,
+                    'ticket_number':ticket_num
                 }
             )
+            junash_vaqti = qs[0].start_train_time
+            borish = sum([i.travel_time for i in qs])
+
+            def vaqt(soat, delta, minut):
+                hmd = timedelta(hours=soat + delta, minutes=minut)
+                return hmd
+            t = vaqt(junash_vaqti.hour, borish, junash_vaqti.minute)
+
+            create_ticket(f'{qs[0].name}',f'{qs[0].start_train_time}',f'{t}',f'{qs[0].place}',ticket_num,cities[from_city_id],cities[to_city_id],end)
             context['form']=form
         return render(request,'routes/create.html',context)
     else:

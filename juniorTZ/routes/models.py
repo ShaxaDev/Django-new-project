@@ -13,6 +13,8 @@ class Route(models.Model):
                                 related_name='route_to_city_set',verbose_name='Qaysi shaxarga')
     trains=models.ManyToManyField('trains.Train',verbose_name='Train list')
 
+    ticket_number=models.IntegerField(default=0)
+
     def __str__(self):
         return f'Route {self.name}'
 

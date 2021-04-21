@@ -92,7 +92,7 @@ def save_route(request):
         if form.is_valid():
             form.save()
             messages.success(request,'Ajoyib sizni yo`lingiz saqlandi!')
-            return redirect('/')
+            return redirect('/list/')
         return render(request,'routes/create.html',{'form':form})
     else:
         messages.error(request,'Saqlashda xatolik aniqlandi !')

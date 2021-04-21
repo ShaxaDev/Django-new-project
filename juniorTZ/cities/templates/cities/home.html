@@ -14,7 +14,7 @@
                           <img src="{{city.image.url}}" class="card-img-top" alt="{{city.name}}" height="220">
                           <div class="card-body">
                             <h5 class="card-title"><a href="{% url 'cities:detail' pk=city.id %}" class="text-decoration-none">{{city.name}}</a></h5>
-                            <p class="card-text">{{city.shahar_haqida_qisqa|truncatechars:120}}</p>
+                            <p class="card-text">{{city.shahar_haqida_qisqa|truncatechars:110}}</p>
                               {% if request.user.is_superuser %}
                                  <a  href="{% url 'cities:update' pk=city.id %}"><buttun type="submit" class="btn btn-primary btn-sm">update</buttun></a>
                                  <a href="{% url 'cities:delete' pk=city.id %}"><buttun type="submit" class="btn btn-danger btn-sm">delete</buttun></a>

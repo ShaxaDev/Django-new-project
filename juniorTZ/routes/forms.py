@@ -1,7 +1,7 @@
 from django import forms
 
 from cities.models import City
-
+from django.contrib.auth.models import User
 from routes.models import Route
 from trains.models import Train
 from django.utils.safestring import mark_safe
@@ -25,6 +25,8 @@ class RouteForm(forms.Form):
                                      attrs={'class': 'form-control', 'type':'date','placeholder': 'kun/oy/yil'}))
 
 
+
+
 class RouteModelForm(forms.ModelForm):
     name=forms.CharField(label='Yo`l nomi',
                                     widget=forms.TextInput(
@@ -42,6 +44,9 @@ class RouteModelForm(forms.ModelForm):
     travel_times = forms.IntegerField(widget=forms.HiddenInput())
 
     ticket_number=forms.IntegerField(widget=forms.HiddenInput())
+
+    passenger=forms.ModelChoiceField(queryset=User.objects.all(),
+                                     widget=forms.HiddenInput())
 
 
     class Meta:

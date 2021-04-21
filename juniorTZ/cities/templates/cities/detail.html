@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
+
+
 {% block content %}
 
-<h1>Tanlangan shaxar haqida batafsil</h1>
-<div class="row">
+<div class="container">
+<h1>{{city.name}} shaxar haqida batafsil</h1>
+<div class="row pb-0">
     <div class="col-md">
         <p>{{city.name}}</p>
     </div>
@@ -14,7 +17,8 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 <!--detail page gorod-->
 <div class="row">
     <div class="col-md-4">
-        <a href="{% url 'cities:home' %}" class="btn btn-primary btn-sm">City list</a>
+        <a href="{% url 'cities:home' %}" class="btn btn-primary btn-sm">Shaxarlar ro'yxati</a>
+        <a href="{%url 'find_routes' %}" class="btn btn-outline-success btn-sm">Sayohat qilish</a>
     </div>
 </div>
 

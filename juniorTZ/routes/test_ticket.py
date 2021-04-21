@@ -15,7 +15,7 @@ def create_ticket(train_name,train_start_time,train_end_time,people_place,ticket
     draw.text((348, 180),f"{ticket_number}",(255,255,255),font=font_junash)
     draw.text((185, 15),f"{from_city}",(255,255,255),font=font_vil)
     draw.text((185, 95),f"{to_city}",(255,255,255),font=font_vil)
-    img.save(f'{ticket_number}.jpg')
+    img.save(f'static/tickets/{ticket_number}.jpg')
 
 create_ticket('ToshSam','12:43','19:43',32,76,'Toshkent','Samarqand',20)
 

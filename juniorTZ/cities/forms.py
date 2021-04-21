@@ -10,4 +10,4 @@ class CityForm(forms.ModelForm):
 
     class Meta:
         model=City
-        fields=('name',)
+        fields=('name','shahar_haqida_qisqa','about_city')

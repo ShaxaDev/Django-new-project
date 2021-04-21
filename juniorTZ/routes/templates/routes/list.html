@@ -5,20 +5,30 @@
 
 <div class="row">
     <div class="col-md-8 mx-auto my-2">
+         <h1>Yo`llar ro`yxati</h1>
         <table class="table table-striped">
+            {% if page_obj %}
             <tr>
                 <th>Yo`l xos nomi</th>
                 <th>Shaxardan</th>
                 <th>Shaxarga</th>
                 <th>Sayohat vaqti</th>
             </tr>
+            {% else %}
+            <p>Siz hali yo`l saqlamadingiz</p>
+            {% endif %}
         {% for object in page_obj %}
-             <tr>
-                 <td><a style="text-decoration:none" href="{% url 'route_detail' object.pk %}">{{object.name}}</a></td>
-                 <td>{{object.from_city}}</td>
-                 <td>{{object.to_city}}</td>
-                 <td>{{object.travel_times}}</td>
-             </tr>
+            {% if object.passenger == request.user %}
+                 <tr>
+                     <td><a style="text-decoration:none" href="{% url 'route_detail' object.pk %}">{{object.name}}</a></td>
+                     <td>{{object.from_city}}</td>
+                     <td>{{object.to_city}}</td>
+                     <td>{{object.travel_times}}</td>
+                </tr>
+            {% else %}
+                <p>Siz hali sayohat uchun yo'l saqlamdingiz </p>
+            {% endif %}
+
         {% endfor %}
         </table>
     </div>

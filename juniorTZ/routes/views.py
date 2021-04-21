@@ -1,6 +1,7 @@
 from datetime import timedelta, datetime
 import random
 
+import requests as requests
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -50,8 +51,6 @@ def add_routes(request):
             total_time=int(data['total_time'])
             end_date=data['end_date']
             datetime_object = datetime.strptime(end_date,'%B %d, %Y')
-            print(datetime_object.day)
-            print(datetime_object.month)
             month_name = datetime_object.strftime('%B')
             end=f'{datetime_object.day}-{month_name}'
             trains=data['trains'].split(',')
@@ -65,7 +64,8 @@ def add_routes(request):
                     'to_city':cities[to_city_id],
                     'trains':qs,
                     'travel_times':total_time,
-                    'ticket_number':ticket_num
+                    'ticket_number':ticket_num,
+                    'passenger':request.user.id,
                 }
             )
             junash_vaqti = qs[0].start_train_time
@@ -75,8 +75,11 @@ def add_routes(request):
                 hmd = timedelta(hours=soat + delta, minutes=minut)
                 return hmd
             t = vaqt(junash_vaqti.hour, borish, junash_vaqti.minute)
+            v=t.seconds//3600
+            m=(t.seconds//60)%60
+            all=f'{v}:{m}'
 
-            create_ticket(f'{qs[0].name}',f'{qs[0].start_train_time}',f'{t}',f'{qs[0].place}',ticket_num,cities[from_city_id],cities[to_city_id],end)
+            create_ticket(f'{qs[0].name}',f'{qs[0].start_train_time}',f'{all}',f'{qs[0].place}',ticket_num,cities[from_city_id],cities[to_city_id],end)
             context['form']=form
         return render(request,'routes/create.html',context)
     else:
@@ -94,11 +97,14 @@ def save_route(request):
     else:
         messages.error(request,'Saqlashda xatolik aniqlandi !')
         return redirect('/')
-
+user=requests
 class RouteListView(ListView):
     paginate_by = 10
     model=Route
     template_name = 'routes/list.html'
+    def get_queryset(self):
+        queryset=Route.objects.filter(passenger=self.request.user)
+        return queryset
 
 class RouteDetailView(DetailView):
     queryset=Route.objects.all()

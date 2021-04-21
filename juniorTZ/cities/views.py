@@ -12,7 +12,7 @@ from .forms import CityForm
 
 def home(request):
     qs=City.objects.all()
-    lst=Paginator(qs,2)
+    lst=Paginator(qs,1)
     page_number=request.GET.get('page')
     page_obj=lst.get_page(page_number)
     context={'page_obj':page_obj}
@@ -45,7 +45,7 @@ class CityDeleteView(SuccessMessageMixin,LoginRequiredMixin,DeleteView):
 class CityListView(ListView):
     model=City
     template_name='cities/home.html'
-    paginate_by=5
+    paginate_by=3
 
     def get_context_data(self, **kwargs):
         context = super(CityListView, self).get_context_data(**kwargs)

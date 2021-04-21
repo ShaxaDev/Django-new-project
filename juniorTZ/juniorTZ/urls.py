@@ -21,6 +21,7 @@ from routes.views import (
     find_routes,home,add_routes,save_route,RouteListView,RouteDetailView,
     RouteDeleteView,
 )
+from .views import team
 
 
 urlpatterns = [
@@ -35,7 +36,7 @@ urlpatterns = [
     path('list/',RouteListView.as_view(),name='list'),
     path('route/<int:pk>',RouteDetailView.as_view(),name='route_detail'),
     path('route/<int:pk>/delete/',RouteDeleteView.as_view(),name='route_delete'),
-
+    path('team/',team,name='team'),
     path('ckdeditor/', include('ckeditor_uploader.urls'))
 
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+\

@@ -17,7 +17,7 @@
                     <input type="hidden" name="trains"
                            value="{% for train in route.trains%}{{ train.id }},{% endfor %}">
                 {% if forloop.first %}<h4>Manzilga borish uchun yo`llar ro`yxati {{routes|length}} ta</h4><br> {% endif %}
-                <h5><i class="fa fa-clock-o" aria-hidden="true"></i> Manzilga borish ucun ketadigan umumiy vaqt  <u>{{ route.total_time }} daqiqa</u></h5>
+                <h5><i class="fa fa-clock-o" aria-hidden="true"></i> Manzilga borish ucun ketadigan umumiy vaqt  <u>{{ route.travel }} soat</u></h5>
                     <div style=" border-left: 4px solid green;">
                 <table class="table" style="border-left: thin solid #A9A9A9;">
                   <thead>

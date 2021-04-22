@@ -14,6 +14,7 @@
         position:fixed; max-height:x; overflow: hidden;
      }
     </style>
+    <link rel="stylesheet" href="{% static 'css/chatw.css' %}">
     {% endif %}
  {% endblock gif %}
 {% block content %}
@@ -50,7 +51,7 @@
                             {% for train in route.trains %}
                             <tr>
                               <th scope="row">{{ forloop.counter }}</th>
-                                <td><i class="fa fa-train" aria-hidden="true"></i> <u>Poyezd {{ train.name }} </u> <b>{{ train.from_city.name }}</b> dan <b>{{ train.to_city.name }}</b> gacha boradi </td>
+                                <td><i class="fa fa-train" aria-hidden="true"></i> <u>Poyezd {{ train.name }} </u> <b>{{ train.from_city.name }}</b> dan <b>{{ train.to_city.name }}</b> gacha boradi {{train.start_train_day}}</td>
 
                             </tr>
                           {% endfor %}
@@ -63,6 +64,9 @@
             {% endfor %}
 
     </div>
+
+
+
 </div>
 
 <!--form pastda qidiruv -->
@@ -70,7 +74,7 @@
 {% else %}
 
 <div class="row">
-    <h3 style="margin-left:400px"><i class="fa fa-train" aria-hidden="true"></i> Sayohat qiling...</h3>
+    <h3 style="margin-left:400px"><i class="fas fa-route"></i> Sayohat qiling...</h3>
     <div class="col-md-4" style="margin-left:400px">
 
         <form method="POST" action="{% url 'find_routes' %}" style="margin-bottom:25px;">{% csrf_token %}
@@ -79,6 +83,32 @@
         </form>
     </div>
 </div>
+<button style="background-image: url('')" class="open-button btn" onclick="openForm()"><img style="height:50px;width:50px" src="{% static 'img/support.png' %}" alt=""></button>
+
+
+<div class="chat-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+    <h3>Operator</h3>
+
+    <label for="msg"><b>Xabar</b></label>
+    <textarea placeholder="sizga qanday yordam bera olamz." name="msg" required></textarea>
+
+    <button type="submit" class="btn btn-btn-danger btn-sm">Yuborish</button>
+    <button type="button" class="btn cancel btn-outline-secondary btn-sm" onclick="closeForm()">Yopish</button>
+  </form>
+</div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+
 {% endif %}
 <div class="clearfix"></div>
 {% endblock content %}

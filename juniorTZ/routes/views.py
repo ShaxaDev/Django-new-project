@@ -98,7 +98,7 @@ def save_route(request):
         messages.error(request,'Saqlashda xatolik aniqlandi !')
         return redirect('/')
 user=requests
-class RouteListView(ListView):
+class RouteListView(LoginRequiredMixin,ListView):
     paginate_by = 10
     model=Route
     template_name = 'routes/list.html'

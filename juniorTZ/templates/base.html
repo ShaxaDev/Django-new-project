@@ -5,7 +5,7 @@
 {% url 'list' as routes_list_url %}
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 
     {% block gif %}
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
     <title>TravelUz</title>
 </head>
-<body >
+<body class="gif">
 
 
 <nav class="navbar navbar-expand-lg navbar-light container fixed-top" style="background-color: #e3f2fd;">
@@ -34,13 +34,13 @@
     <div class="collapse navbar-collapse"  id="navbarNavDropdown">
       <ul class="navbar-nav" style="margin-left:auto;">
         <li class="nav-item">
-          <a class="nav-link {% if request.path == cities_home_url %}active{% endif %}" aria-current="page" href="{% url 'cities:home'%}">Shaxar</a>
+          <a class="nav-link {% if request.path == cities_home_url %}active{% endif %}" aria-current="page" href="{% url 'cities:home'%}">Shahar</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {% if request.path == trains_home_url %}active{% endif %}" href="{% url 'trains:home' %}">Poyezd</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if request.path == routes_list_url %}active{% endif %}" href="{% url 'list' %}">Yo`l</a>
+          <a class="nav-link {% if request.path == routes_list_url %}active{% endif %}" href="{% url 'list' %}">Sayohatlarim</a>
         </li>
           {% if request.user.is_superuser %}
         <li class="nav-item dropdown">
@@ -48,7 +48,7 @@
             Qo`shish
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'cities:create' %}">Shaxar Qo`shish</a></li>
+            <li><a class="dropdown-item" href="{% url 'cities:create' %}">Shahar Qo`shish</a></li>
             <li><a class="dropdown-item" href="{% url 'trains:create' %}">Poyezd Qo`shish</a></li>
           </ul>
         </li>
@@ -57,9 +57,16 @@
                 <a class="nav-link" href="{% url 'team' %}">Bizning jamoa</a>
             </li>
           {% if request.user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'accounts:logout' %}">Chiqish</a>
-            </li>
+             <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i> {{request.user}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'list' %}">Sayohatlarim</a></li>
+              <div class="dropdown-divider"></div>
+            <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Chiqish <i class="fas fa-sign-out-alt"></i></a></li>
+          </ul>
+        </li>
           {% else %}
              <li class="nav-item">
                 <a class="nav-link" href="{% url 'accounts:login' %}">Kirish</a>

@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
-{% block gif %}
 
-{% endblock %}
 {% block content %}
-<h1>Poyezdlar ro`yxati</h1>
+
 
 <div class="row">
     <div class="col-md-8 mx-auto my-2">
+        <h1>Poyezdlar ro`yxati</h1>
         <table class="table table-striped">
             <tr>
                 <th>Poyezd raqami</th>
@@ -23,7 +22,7 @@
                  <td><a style="text-decoration:none" href="{% url 'trains:detail' object.pk %}">{{object.name}}</a></td>
                  <td>{{object.from_city}}</td>
                  <td>{{object.to_city}}</td>
-                 <td>{{object.travel_time}}</td>
+                 <td>{{object.travel_time}} soat</td>
                   {% if request.user.is_superuser %}
                  <td><a href="{% url 'trains:update' object.pk %}" class="btn btn-primary btn-sm">Update</a></td>
                  <td><a href="{% url 'trains:delete' object.pk %}" class="btn btn-danger btn-sm">Delete</a></td>

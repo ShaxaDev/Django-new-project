@@ -7,22 +7,24 @@ from trains.models import Train
 from django.utils.safestring import mark_safe
 
 class RouteForm(forms.Form):
-    from_city = forms.ModelChoiceField(label=mark_safe('<b>Qaysi shaxardan</b>'),empty_label='shaxar tanlang',
+    from_city = forms.ModelChoiceField(label=mark_safe('<b>Qaysi shahardan</b>'),
+                                     empty_label='shahar tanlang',
                                      queryset=City.objects.all(),
                                      widget=forms.Select(
                                      attrs={'class':'form-control js-example-basic-single'}))
-    to_city = forms.ModelChoiceField(label=mark_safe('<b>Qaysi shaxarga</b>'),empty_label='shaxar tanlang',
+    to_city = forms.ModelChoiceField(label=mark_safe('<b>Qaysi shaharga</b>'),
+                                     empty_label='shahar tanlang',
                                      queryset=City.objects.all(),
                                      widget=forms.Select(
                                      attrs={'class': 'form-control js-example-basic-single'}))
-    cities = forms.ModelMultipleChoiceField(label=mark_safe('<b>Qaysi shaxar orqali</b>'),
-
+    cities = forms.ModelMultipleChoiceField(label=mark_safe('<b>Qaysi shahar orqali</b>'),
                                      queryset=City.objects.all(),required=False,
                                      widget=forms.SelectMultiple(
                                      attrs={'class': 'form-control js-example-basic-multiple'}))
     travelling_time = forms.DateField(label=mark_safe('<b>Ketish kuni</b>'),
                                      widget=forms.DateInput(
-                                     attrs={'class': 'form-control', 'type':'date','placeholder': 'kun/oy/yil'}))
+                                     attrs={'class': 'form-control', 'type':'date','placeholder': 'Qachon?', 'type': 'text',
+                                     'onfocus': "(this.type='date')",}))
 
 
 
